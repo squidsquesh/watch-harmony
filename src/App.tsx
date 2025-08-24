@@ -13,6 +13,7 @@ import Series from "./pages/Series";
 import ChatRooms from "./pages/ChatRooms";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import Watch from "./pages/Watch";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/chat-rooms" element={<ChatRooms />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/watch/:id" element={<Watch />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

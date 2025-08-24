@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -103,26 +104,26 @@ const Movies = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-4">
             Discover <span className="text-gradient">Movies</span>
           </h1>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-base md:text-lg">
             Find your next favorite movie to watch with friends
           </p>
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-8 space-y-4">
+        <div className="mb-6 md:mb-8 space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 md:w-5 h-4 md:h-5" />
             <Input
               placeholder="Search movies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 glass"
+              className="pl-9 md:pl-10 glass text-sm md:text-base"
             />
           </div>
 
@@ -133,7 +134,7 @@ const Movies = () => {
                 variant={selectedGenre === genre ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedGenre(genre)}
-                className={selectedGenre === genre ? "bg-gradient-primary" : "btn-glass"}
+                className={`text-xs md:text-sm ${selectedGenre === genre ? "bg-gradient-primary" : "btn-glass"}`}
               >
                 {genre.charAt(0).toUpperCase() + genre.slice(1)}
               </Button>
@@ -142,22 +143,24 @@ const Movies = () => {
         </div>
 
         {/* Movies Grid */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
           {filteredMovies.map((movie) => (
             <Card key={movie.id} className="card-glass card-hover overflow-hidden group">
               <div className="relative overflow-hidden">
                 <img
                   src={movie.thumbnail}
                   alt={movie.title}
-                  className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4">
-                    <Button size="sm" className="w-full btn-hero mb-2">
-                      <Play className="mr-2 w-4 h-4" />
-                      Watch Now
+                    <Button size="sm" className="w-full btn-hero mb-2" asChild>
+                      <Link to={`/watch/${movie.id}`}>
+                        <Play className="mr-2 w-4 h-4" />
+                        Watch Now
+                      </Link>
                     </Button>
                     <div className="flex items-center justify-between text-white text-xs">
                       <div className="flex items-center space-x-1">
@@ -179,19 +182,19 @@ const Movies = () => {
                 </Badge>
               </div>
 
-              <CardContent className="p-4">
-                <h3 className="font-semibold text-lg mb-1 line-clamp-1">{movie.title}</h3>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">
+              <CardContent className="p-3 md:p-4">
+                <h3 className="font-semibold text-sm md:text-lg mb-1 line-clamp-1">{movie.title}</h3>
+                <div className="flex items-center space-x-1 md:space-x-2 text-xs md:text-sm text-muted-foreground mb-2">
                   <div className="flex items-center space-x-1">
                     <Calendar className="w-3 h-3" />
                     <span>{movie.year}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Clock className="w-3 h-3" />
-                    <span>{movie.duration}</span>
+                    <span className="hidden sm:inline">{movie.duration}</span>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 mb-2 md:mb-3 hidden md:block">
                   {movie.description}
                 </p>
                 
@@ -203,7 +206,7 @@ const Movies = () => {
                     {movie.activeRooms > 0 ? (
                       <span className="text-success">{movie.activeRooms} rooms</span>
                     ) : (
-                      <span>No active rooms</span>
+                      <span className="hidden md:inline">No active rooms</span>
                     )}
                   </div>
                 </div>
