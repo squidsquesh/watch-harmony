@@ -15,6 +15,10 @@ import {
   Check
 } from 'lucide-react';
 import heroImage from '@/assets/hero-streaming.jpg';
+import moviePostersHero from '@/assets/movie-posters-hero.jpg';
+import spidermanPoster from '@/assets/poster-spiderman.jpg';
+import batmanPoster from '@/assets/poster-batman.jpg';
+import avengersPoster from '@/assets/poster-avengers.jpg';
 
 const Landing = () => {
   const features = [
@@ -92,59 +96,99 @@ const Landing = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero py-20 md:py-32">
+      <section className="relative overflow-hidden bg-gradient-hero py-12 md:py-20 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent" />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <Badge variant="secondary" className="mb-4 glass">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="animate-fade-in text-center lg:text-left">
+              <Badge variant="secondary" className="mb-4 glass inline-flex">
                 ✨ Now in Beta
               </Badge>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 leading-tight">
                 Watch Together,
                 <span className="text-gradient block">Anywhere</span>
               </h1>
               
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 lg:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 Experience synchronized video streaming with friends and family. 
                 Create watch parties, chat in real-time, and never watch alone again.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center lg:justify-start">
                 <Button size="lg" asChild className="btn-hero">
                   <Link to="/register">
                     Start Watching Free
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5" />
                   </Link>
                 </Button>
                 
                 <Button size="lg" variant="outline" className="btn-glass">
-                  <Play className="mr-2 w-5 h-5" />
+                  <Play className="mr-2 w-4 h-4 lg:w-5 lg:h-5" />
                   Watch Demo
                 </Button>
               </div>
             </div>
             
             <div className="relative">
-              <div className="animate-float">
+              {/* Main Hero Image */}
+              <div className="animate-float relative">
                 <img 
-                  src={heroImage} 
-                  alt="SyncStream Platform" 
-                  className="rounded-2xl shadow-large hover-tilt"
+                  src={moviePostersHero} 
+                  alt="Popular Movies on SyncStream" 
+                  className="rounded-2xl shadow-large hover-tilt w-full"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl" />
+                
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm rounded-full w-16 h-16 p-0"
+                    asChild
+                  >
+                    <Link to="/movies">
+                      <Play className="w-6 h-6 ml-1" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+              
+              {/* Floating Movie Posters */}
+              <div className="absolute -top-4 -right-2 md:-right-4 animate-pulse-glow hidden sm:block">
+                <img 
+                  src={spidermanPoster} 
+                  alt="Spider-Man" 
+                  className="w-16 md:w-20 lg:w-24 rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
                 />
               </div>
               
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 glass p-4 rounded-xl animate-pulse-glow">
-                <Users className="w-6 h-6 text-primary" />
-                <span className="block text-sm font-medium mt-1">1.2k Online</span>
+              <div className="absolute -bottom-4 -left-2 md:-left-4 animate-pulse-glow hidden sm:block">
+                <img 
+                  src={batmanPoster} 
+                  alt="Batman" 
+                  className="w-16 md:w-20 lg:w-24 rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                />
               </div>
               
-              <div className="absolute -bottom-4 -left-4 glass p-4 rounded-xl animate-pulse-glow">
-                <RotateCw className="w-6 h-6 text-secondary" />
-                <span className="block text-sm font-medium mt-1">99.9% Sync</span>
+              <div className="absolute top-1/2 -right-6 md:-right-8 transform -translate-y-1/2 animate-float hidden md:block" style={{ animationDelay: '1s' }}>
+                <img 
+                  src={avengersPoster} 
+                  alt="Avengers" 
+                  className="w-20 lg:w-24 rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                />
+              </div>
+              
+              {/* Stats Floating Cards */}
+              <div className="absolute -top-2 -right-2 lg:-top-4 lg:-right-4 glass p-3 lg:p-4 rounded-xl animate-pulse-glow">
+                <Users className="w-5 h-5 lg:w-6 lg:h-6 text-primary" />
+                <span className="block text-xs lg:text-sm font-medium mt-1">1.2k Online</span>
+              </div>
+              
+              <div className="absolute -bottom-2 -left-2 lg:-bottom-4 lg:-left-4 glass p-3 lg:p-4 rounded-xl animate-pulse-glow">
+                <RotateCw className="w-5 h-5 lg:w-6 lg:h-6 text-secondary" />
+                <span className="block text-xs lg:text-sm font-medium mt-1">99.9% Sync</span>
               </div>
             </div>
           </div>
